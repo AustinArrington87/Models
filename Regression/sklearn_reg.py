@@ -4,6 +4,7 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
+from sklearn.ensemble import AdaBoostRegressor
 
 # https://towardsdatascience.com/simple-linear-regression-model-using-python-machine-learning-eab7924d18b4
 
@@ -58,3 +59,15 @@ y_test_pred = lm.predict(X_test_lm)
 # comare the R2 of training and test data 
 print(r2_score(y_train_lm,y_train_pred))
 print(r2_score(y_test_lm,y_test_pred))
+
+# compare simple linear with AdaBoost Regressor
+# define the model
+model = AdaBoostRegressor()
+# fit the model on the whole dataset
+model.fit(X_train_lm, y_train_lm)
+# make predictions of y_value 
+y_train_pred_ada = model.predict(X_train_lm)
+y_test_pred_ada = model.predict(X_test_lm)
+# compare R2 of training and test data
+print(r2_score(y_train_lm, y_train_pred_ada))
+print(r2_score(y_test_lm,y_test_pred_ada))
