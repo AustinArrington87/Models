@@ -1,0 +1,63 @@
+# reference https://www.dev2qa.com/how-to-use-mysql-on-mac/
+# https://dev.mysql.com/doc/refman/8.0/en/creating-database.html
+
+# create a database or "schema"
+CREATE SCHEMA `dev2qa` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
+or 
+CREATE DATABASE menagerie;
+
+# create table 
+CREATE TABLE `dev2qa`.`soc` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `idsoc_UNIQUE` (`id` ASC) VISIBLE);
+
+#### CHECK THIS OUT 
+
+CREATE DATABASE menagerie;
+SHOW DATABASES;
+USE menagerie;
+CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20), 
+species VARCHAR(20), sex VARCHAR(1), birth DATE, death DATE);
+SHOW TABLES;
+DESCRIBE pet;
+
+
+### Go here and add configuration file
+### '/usr/local/mysql-8.0.29-macos12-arm64/data/my.cnf’
+SET GLOBAL local_infile = true;
+SHOW GLOBAL VARIABLES LIKE 'local_infile';
+SHOW VARIABLES LIKE "secure_file_priv";
+
+### add pet.txt to data folder 
+LOAD DATA INFILE '/usr/local/mysql-8.0.29-macos12-arm64/data/pet.txt'
+INTO TABLE pet
+LINES TERMINATED BY '\r';
+
+# Delete 
+DELETE FROM pet;
+
+# INSERTING DATA
+INSERT INTO pet
+VALUES ('Puffball', 'Diane', 'hamster', 'f', '1999-03-30', NULL);
+INSERT INTO pet
+VALUES ('Killer', 'Diane', 'dog', 'm', '2010-03-30', NULL);
+
+# RETRIEVING DATA
+SELECT * FROM pet;
+
+# UPDATE VALUE 
+UPDATE pet SET death = '2005-02-22' WHERE name='Puffball';
+
+# RETRIEVING DATA WITH PARAMATERS
+SELECT * FROM pet WHERE name = "Fluffy";
+SELECT * FROM pet WHERE birth >= '1988-01-01';
+SELECT * FROM pet WHERE species='cat' AND sex='f';
+SELECT * FROM pet WHERE species='cat' OR species='hamster';
+SELECT * FROM pet WHERE (species='cat' AND sex='f')
+OR (species='dog' AND sex='m');
+
+
+
+
+
