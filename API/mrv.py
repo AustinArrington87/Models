@@ -80,15 +80,18 @@ print("Number of Fields", len(fields))
 print("Year Enrolled: ", str(year_enrolled))
 print("Lookback Year: ", str(lookback_year))
 print("Total Acres: ", sum(field_dic['acres']))
+print("Practice Changes: ", field_dic['practice_changes'])
 
 # split event data into baseline and test scenarios 
 # first -- Generate Baseline DNDC API call for all the fields (4 fields in this test)
-for i in field_dic['history']:
-	print(i)
-	for j in i:
-		print(j['year'])
-		if j['year'] < year_enrolled:
-			print(True)
+
+
+# for i in field_dic['history']:
+# 	print(i)
+# 	for j in i:
+# 		print(j['year'])
+# 		if j['year'] < year_enrolled:
+# 			print(True)
 
 # Give Field Details 
 # print(FieldData(mrv_Data))
